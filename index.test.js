@@ -61,3 +61,15 @@ test('#9 class objects', () => {
   expect(person.name).toEqual("Jhon");
   expect(person.fullName()).toEqual("Jhon Doe");
 });
+
+test('#10 share object methods', () => {
+  const dog = new Dog()
+  const cat = new Cat()
+  const parrot = new Parrot()
+
+  expect(dog.talk()).toEqual('woof, woof!');
+  expect(cat.talk()).toEqual('miau, miau!');
+  expect(parrot.talk('woof, woof!')).toEqual('woof, woof!');
+  expect(parrot.dog()).toEqual('woof, woof!');
+  expect(parrot.cat()).toEqual('miau, miau!');
+});
