@@ -39,9 +39,16 @@ test('#03 sleep', async (done) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  setTimeout(() => {
-    done()
-  }, 4000);
+  const temp
+  function dontCallFast() {
+    if(temp >= 2) {
+      throw new Error('Dot call me')
+    }
+    temp = temp + 1
+    setTimeout(() => {
+      temp = 0
+    }, 800);
+  }
 
   [0,1,2,3,4,5].forEach(async function(number) {
     await sleep(1000)
