@@ -34,7 +34,7 @@ test('#02 Closure, Read json files in loop', (done) => {
 })
 
 
-test('#03 sleep', async (done) => {
+test('#03 sleep and rateLimitApp', async (done) => {
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
