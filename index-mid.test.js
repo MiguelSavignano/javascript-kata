@@ -1,4 +1,5 @@
 const fs = require('fs')
+const rateLimitApp = require('./src/rateLimitApp')
 
 test('#01 promisify', async () => {
   const readFileAsync = myPromisify(fs.readFile)
@@ -33,24 +34,14 @@ test('#02 Closure, Read json files in loop', (done) => {
 })
 
 
-
 test('#03 sleep', async (done) => {
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  const temp
-  function dontCallFast() {
-    if(temp >= 2) {
-      throw new Error('Dot call me')
-    }
-    temp = temp + 1
-    setTimeout(() => {
-      temp = 0
-    }, 800);
-  }
-
-  [0,1,2,3,4,5].forEach(async function(number) {
+  await Promise.all([0,1,2,3].map(async function(number) {
     await sleep(1000)
-  })
+    rateLimitApp()
+  }))
+  done()
 })
