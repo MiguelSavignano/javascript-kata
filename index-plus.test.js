@@ -39,9 +39,13 @@ test('#03 sleep and rateLimitApp', async (done) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  // Update the code to pass print the correct numbers
+  // without removing sleep and rateLimitApp
+
   await Promise.all([0,1,2,3].map(async function(number) {
     await sleep(1000)
     rateLimitApp()
   }))
   done()
+  // shloud not throw errors
 })
